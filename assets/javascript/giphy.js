@@ -35,7 +35,7 @@ function displayGiphy() {
         animalDiv.append(image);
 
         // Putting the user named animal above the exising animal selected
-        $("#animals-view").prepend(movieDiv);
+        $("#animals-view").prepend(animalDiv);
     });
 
 };
@@ -48,9 +48,9 @@ function renderButtons() {
     $("#buttons-view").empty();
 
     // Looping through the array of movies
-    for (var i = 0; i < movies.length; i++) {
+    for (var i = 0; i < animals.length; i++) {
 
-        // Then dynamicaly generating buttons for each movie in the array
+        // Then dynamicaly generating buttons for each animal in the array
         // This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
         var a = $("<button>");
         // Adding a class of animal-btn to our button
@@ -78,7 +78,7 @@ $("#add-animal").on("click", function(event) {
 });
 
 // Adding a click event listener to all elements with a class of "animal-btn"
-$(document).on("click", ".animal-btn", displayAnimalInfo);
+$(document).on("click", ".animal-btn", displayGiphy);
 
 // Calling the renderButtons function to display the intial buttons
 renderButtons();
