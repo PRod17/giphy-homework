@@ -3,7 +3,7 @@
 // Initial array of animals
 var animals = ["Dog", "Cat", "Tortoise",];
 function displayGiphy() {
-
+    console.log("displayGiphy function fired");
     var animal = $(this).attr("data-name");
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + animal + "&limit=10&api_key=dc6zaTOxFJmzC";
 
@@ -12,22 +12,24 @@ function displayGiphy() {
         url: queryURL,
         method: "GET"
     }).then(function (response) {
+        console.log(response);
 
+        for (var i = 0; i < animals.length; i++){
         // Creating a div to hold the animal
         var animalDiv = $("<div class='animal'>");
 
         // Storing the rating data
-        var rating = response.Rated;
+        // var rating = response.Rated;
 
         // Creating an element to have the rating displayed
-        var pictureRating = $("<p>").text("Rating: " + rating);
+        // var pictureRating = $("<p>").text("Rating: " + rating);
 
         // Displaying the rating
-        animalDiv.append(pictureRating);
+        // S
 
         // Retrieving the URL for the image
-        var imgURL = response.Giphy;
-
+        var imgURL = response.data[i].images.original;
+        console.log(imgURL);
         // Creating an element to hold the image
         var image = $("<img>").attr("src", imgURL);
 
@@ -35,19 +37,19 @@ function displayGiphy() {
         animalDiv.append(image);
 
         // Putting the user named animal above the exising animal selected
-        $("#animals-view").prepend(animalDiv);
-    });
+        $("#animal-view").prepend(animalDiv);
+    }});
 
 };
 
-// Function for displaying movie data
+// Function for displaying animal data
 function renderButtons() {
 
-    // Deleting the movies prior to adding new movies
-    // (this is necessary otherwise you will have repeat buttons)
+    // Deletes animals before adding new animals
+    
     $("#buttons-view").empty();
 
-    // Looping through the array of movies
+    // Looping through the array of animals
     for (var i = 0; i < animals.length; i++) {
 
         // Then dynamicaly generating buttons for each animal in the array
