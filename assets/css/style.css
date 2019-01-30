@@ -1,0 +1,37 @@
+body{
+    text-align: center;
+    margin-top: 5px;
+    background-color: #d3c8c8;
+}
+
+.container{
+margin-top: 5px;
+
+}
+
+.animal-btn{
+    background-color: #8e9fec;
+}
+#buttons-view{
+margin-bottom: 10px;
+
+}
+
+
+
+#add-animal{
+margin-top: 10px;
+background-color: #8e9fec;
+
+}
+
+.animal{
+text-align: center;    
+float: left;
+width: 33.33%;
+height: auto;
+
+
+
+
+}

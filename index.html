@@ -17,30 +17,33 @@
 </head>
 
 <body>
-    <h1>Giphy, Animal Finder</h1>
+    <h1>Awesome Animal Gifs</h1>
 
     <div class="container">
-        <h1>Animal Search</h1>
+        
 
         <!-- user animal choices  -->
-        <div id="buttons-view"></div>
 
-        <form id="animal-form">
-            <label for="animal-input">Name an Animal</label>
-            <input type="text" id="animal-input">
-            <br>
+            <div id="buttons-view"></div>
 
-            <!-- Button triggers user animal to be added -->
-            <input id="add-animal" type="submit" value="Name an Animal">
-        </form>
+            
+            <form id="animal-form">
+                <label for="animal-input"></label>
+                <input type="text" id="animal-input">
+                <br>
+                
+                <!-- Button triggers user animal to be added -->
+                <input id="add-animal" type="submit" value="Create Link">
+            </form>
+    
 
         <!-- Animals will Get Dumped Here -->
-        <div id="animal-view"></div>
+        <div id="animal-view" class="row"></div>
 
 
 
     </div>
-    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="assets/javascript/giphy.js"></script>
 
 </body>

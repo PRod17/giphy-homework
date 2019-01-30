@@ -14,31 +14,47 @@ function displayGiphy() {
     }).then(function (response) {
         console.log(response);
 
-        for (var i = 0; i < animals.length; i++){
-        // Creating a div to hold the animal
-        var animalDiv = $("<div class='animal'>");
+        var data = response.data;
+        console.log(data);
 
-        // Storing the rating data
-        // var rating = response.Rated;
+        for (var i = 0; i < data.length; i++) {
+            // Creating a div to hold the animal
+            var animalDiv = $("<div class='col-12 col-md-4'>");
 
-        // Creating an element to have the rating displayed
-        // var pictureRating = $("<p>").text("Rating: " + rating);
+            // Storing the rating data
+            var rating = data[i].rating;
+            console.log(rating);
 
-        // Displaying the rating
-        // S
+            // Creating an element to have the rating displayed
+            var gifRating = $("<p>").text("Rating: " + rating);
 
-        // Retrieving the URL for the image
-        var imgURL = response.data[i].images.original;
-        console.log(imgURL);
-        // Creating an element to hold the image
-        var image = $("<img>").attr("src", imgURL);
+            // Displaying the rating
+            animalDiv.append(gifRating);
 
-        // Appending the image
-        animalDiv.append(image);
+            // Retrive still image
+            var stillURL = response.data[i].images.fixed_width_still.url;
 
-        // Putting the user named animal above the exising animal selected
-        $("#animal-view").prepend(animalDiv);
-    }});
+            // Retrieving the URL for the image
+            var imgURL = response.data[i].images.fixed_width.url;
+            console.log(imgURL);
+            // Retrieving still URL
+            // var fixedURL = response.data[i].images.fixed_width_still.url;
+            // console.log(fixedURL)
+            // Creating an element to hold the image
+            var image = $("<img>").attr("src", imgURL);
+            image.attr("src", stillURL);
+            image.attr("data-still", stillURL);
+            image.attr("data-animate", imgURL);
+            image.attr("data-state", "still");
+            image.attr("class", "gifs");
+
+            // Appending the image
+            animalDiv.append(image);
+
+            // Putting the user named animal above the exising animal selected
+            $("#animal-view").prepend(animalDiv);
+        }
+    });
 
 };
 
@@ -46,14 +62,13 @@ function displayGiphy() {
 function renderButtons() {
 
     // Deletes animals before adding new animals
-    
+
     $("#buttons-view").empty();
 
     // Looping through the array of animals
     for (var i = 0; i < animals.length; i++) {
 
         // Then dynamicaly generating buttons for each animal in the array
-        // This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
         var a = $("<button>");
         // Adding a class of animal-btn to our button
         a.addClass("animal-btn");
@@ -67,7 +82,7 @@ function renderButtons() {
 };
 
 // This function handles events where an animal button is clicked
-$("#add-animal").on("click", function(event) {
+$("#add-animal").on("click", function (event) {
     event.preventDefault();
     // This line grabs the input from the textbox
     var animal = $("#animal-input").val().trim();
@@ -78,9 +93,27 @@ $("#add-animal").on("click", function(event) {
     // Calling renderButtons which handles the processing of the animal array
     renderButtons();
 });
+// on.click to change state of gif
+$(document).on("click",".gifs", function() {
+    console.log("click workin");
+var state = $(this).attr("data-state");
+
+if (state === "still") {
+    $(this).attr("src", $(this).attr("data-animate"));
+    $(this).attr("data-state", "animate");
+} else {
+    $(this).attr("src", $(this).attr("data-still"));
+    $(this).attr("data-state", "still");
+}
+});
+
 
 // Adding a click event listener to all elements with a class of "animal-btn"
-$(document).on("click", ".animal-btn", displayGiphy);
+$(document).on("click", ".animal-btn", displayGiphy); {
+
+   
+
+};
 
 // Calling the renderButtons function to display the intial buttons
 renderButtons();
